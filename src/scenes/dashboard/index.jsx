@@ -4,7 +4,7 @@ import { Box } from '@mui/material'
 
 const Dashboard = () => {
   return (
-    <Box m="20px">
+    <Box>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="Dashboard" subtitle="Admin Dashboard for ArtiMart E-Commerce Platform" />
       </Box>
