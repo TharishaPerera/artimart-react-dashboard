@@ -13,7 +13,7 @@ const Team = () => {
   const colors = tokens(theme.palette.mode);
 
   const columns = [
-    { field: "id", headerName: "ID" },
+    { field: "id", headerName: "ID", flex: 0.2 },
     {
       field: "name",
       headerName: "NAME",
@@ -28,8 +28,8 @@ const Team = () => {
       headerAlign: "left",
       align: "left",
     },
-    { field: "age", headerName: "AGE" },
-    { field: "phone", headerName: "PHONE", flex: 0.2 },
+    { field: "age", headerName: "AGE", flex: 0.2 },
+    { field: "phone", headerName: "PHONE", flex: 0.5 },
     {
       field: "access",
       headerName: "ACCESS",
@@ -37,7 +37,7 @@ const Team = () => {
       renderCell: ({ row: { access } }) => {
         return (
           <Box
-            width="60%"
+            width="50%"
             p="5px"
             display="flex"
             justifyContent="center"

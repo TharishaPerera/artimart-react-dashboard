@@ -12,6 +12,10 @@ body,
   font-family: 'Poppins', sans-serif;
 }
 
+/* body {
+  overflow-x: hidden;
+} */
+
 .app {
   display: flex;
   position: relative;
