@@ -10,7 +10,6 @@ const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  console.log(data)
   return (
     <ResponsiveBar
       data={data}
@@ -73,20 +72,6 @@ const BarChart = ({ isDashboard = false }) => {
           rotation: -45,
           lineWidth: 6,
           spacing: 10,
-        },
-      ]}
-      fill={[
-        {
-          match: {
-            id: "fries",
-          },
-          id: "dots",
-        },
-        {
-          match: {
-            id: "sandwich",
-          },
-          id: "lines",
         },
       ]}
       borderColor={{
