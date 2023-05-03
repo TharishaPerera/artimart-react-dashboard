@@ -39,12 +39,15 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const user = "admin";
 
   return (
     <Box
       sx={{
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
+          minHeight: "100vh",
+          height: "100%",
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -128,6 +131,8 @@ const Sidebar = () => {
 
           {/* MENU ITEMS */}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+
+          {/* {user === "admin" && ( */}
             <Item
               title="Dashboard"
               to="/dashboard"
@@ -135,6 +140,7 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+          {/* )} */}
 
             <Typography
               variant="h6"
