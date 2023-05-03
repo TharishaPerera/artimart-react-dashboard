@@ -67,6 +67,7 @@ const PieChart = () => {
         from: "color",
         modifiers: [["darker", 2]],
       }}
+      motionConfig="slow"
       legends={[
         {
           anchor: "bottom",
