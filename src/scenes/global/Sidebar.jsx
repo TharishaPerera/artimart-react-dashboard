@@ -131,8 +131,7 @@ const Sidebar = () => {
 
           {/* MENU ITEMS */}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-
-          {/* {user === "admin" && ( */}
+            {/* {user === "admin" && ( */}
             <Item
               title="Dashboard"
               to="/dashboard"
@@ -140,20 +139,28 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-          {/* )} */}
+            {/* )} */}
 
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              letterSpacing={3}
+              letterSpacing={2}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              DATA
+              USERS
             </Typography>
 
             <Item
-              title="Manage Team"
-              to="/team"
+              title="Manage Users"
+              to="/users"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
+              title="Create Users"
+              to="/users/create"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -178,10 +185,10 @@ const Sidebar = () => {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              letterSpacing={3}
+              letterSpacing={2}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              PAGES
+              ITEMS
             </Typography>
 
             <Item
@@ -211,10 +218,10 @@ const Sidebar = () => {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              letterSpacing={3}
+              letterSpacing={2}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              STAT
+              STATS
             </Typography>
 
             <Item
