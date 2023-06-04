@@ -1,5 +1,13 @@
 import React from "react";
-import { Box, Button, TextField, Select } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -14,9 +22,15 @@ const UserForm = () => {
     email: "",
     password: "",
     age: 0,
-    telephone: "",
-    address: "",
-    role: "",
+    gender: "male",
+    telephoneMobile: "",
+    telephoneHome: "",
+    houseNo: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    zipCode: "",
+    role: "admin",
   };
 
   const phoneRegExp = /^(\+\d{1,2}\s)?\(?\d{3}\)?\d{3}\d{4}$/;
@@ -25,21 +39,28 @@ const UserForm = () => {
     "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&]).{8}$";
 
   const userSchema = yup.object().shape({
-    firstName: yup.string().required("First name cannot be empty."),
-    lastName: yup.string().required("Last name cannot be empty."),
+    firstName: yup.string().required("First name field cannot be empty."),
+    lastName: yup.string().required("Last name field cannot be empty."),
     email: yup
       .string()
       .email("Invalid email address.")
-      .required("Email cannot be empty."),
-    password: yup.string().required("Password cannot be empty."),
+      .required("Email field cannot be empty."),
+    password: yup.string().required("Password field cannot be empty."),
     // .matches(passwordRegExp, "Password should have atleast 1 uppercase, 1 lowercase, 1 number & 8 characters minimum.")
-    age: yup.number().required("Age cannot be empty."),
-    telephone: yup
+    age: yup.number().required("Age field cannot be empty."),
+    gender: yup.string().required("Gender field cannot be empty. "),
+    telephoneMobile: yup
       .string()
       .matches(phoneRegExp, "Invalid phone number.")
-      .required("Telephone number cannot be empty."),
-    role: yup.string().required("Role cannot be empty."),
-    address: yup.string().required("Address cannot be empty."),
+      .required("Telephone number field cannot be empty."),
+    telephoneHome: yup.string().matches(phoneRegExp, "Invalid phone number."),
+    role: yup.string().required("Role field cannot be empty."),
+    houseNo: yup.string().required("House number field cannot be empty."),
+    addressLine1: yup
+      .string()
+      .required("Address Line 1 field cannot be empty."),
+    city: yup.string().required("City field cannot be empty."),
+    zipCode: yup.string().required("Zip code field cannot be empty."),
   });
 
   const handleFormSubmit = (values) => {
@@ -126,8 +147,34 @@ const UserForm = () => {
                 name="password"
                 error={!!touched.password && !!errors.password}
                 helperText={touched.password && errors.password}
-                sx={{ gridColumn: "span 2" }}
+                sx={{ gridColumn: "span 1" }}
               />
+
+              <FormControl sx={{ gridColumn: "span 1" }}>
+                <InputLabel id="role-select" sx={{ lineHeight: 4.5 }}>
+                  Role
+                </InputLabel>
+                <Select
+                  labelId="role-select"
+                  fullWidth
+                  variant="filled"
+                  type="text"
+                  label="Role"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.role}
+                  name="role"
+                  error={!!touched.role && !!errors.role}
+                  helperText={touched.role && errors.role}
+                >
+                  <MenuItem value="admin" label="Select role">
+                    Admin
+                  </MenuItem>
+                  <MenuItem value="buyer" label="Select role">
+                    Buyer
+                  </MenuItem>
+                </Select>
+              </FormControl>
 
               <TextField
                 fullWidth
@@ -143,17 +190,43 @@ const UserForm = () => {
                 sx={{ gridColumn: "span 1" }}
               />
 
+              <FormControl sx={{ gridColumn: "span 1" }}>
+                <InputLabel id="gender-select" sx={{ lineHeight: 4.5 }}>
+                  Gender
+                </InputLabel>
+                <Select
+                  labelId="gender-select"
+                  fullWidth
+                  variant="filled"
+                  type="text"
+                  label="Gender"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.gender}
+                  name="gender"
+                  error={!!touched.gender && !!errors.gender}
+                  helperText={touched.gender && errors.gender}
+                >
+                  <MenuItem value="male" label="Male">
+                    Male
+                  </MenuItem>
+                  <MenuItem value="female" label="Female">
+                    Female
+                  </MenuItem>
+                </Select>
+              </FormControl>
+
               <TextField
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Telephone Number"
+                label="Telephone Number (Mobile)"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.telephone}
-                name="telephone"
-                error={!!touched.telephone && !!errors.telephone}
-                helperText={touched.telephone && errors.telephone}
+                value={values.telephoneMobile}
+                name="telephoneMobile"
+                error={!!touched.telephoneMobile && !!errors.telephoneMobile}
+                helperText={touched.telephoneMobile && errors.telephoneMobile}
                 sx={{ gridColumn: "span 1" }}
               />
 
@@ -161,13 +234,55 @@ const UserForm = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Role"
+                label="Telephone Number (Home)"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.role}
-                name="role"
-                error={!!touched.role && !!errors.role}
-                helperText={touched.role && errors.role}
+                value={values.telephoneHome}
+                name="telephoneHome"
+                error={!!touched.telephoneHome && !!errors.telephoneHome}
+                helperText={touched.telephoneHome && errors.telephoneHome}
+                sx={{ gridColumn: "span 1" }}
+              />
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="House Number"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.houseNo}
+                name="houseNo"
+                error={!!touched.houseNo && !!errors.houseNo}
+                helperText={touched.houseNo && errors.houseNo}
+                sx={{ gridColumn: "span 1" }}
+              />
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Address Line 1"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.addressLine1}
+                name="addressLine1"
+                error={!!touched.addressLine1 && !!errors.addressLine1}
+                helperText={touched.addressLine1 && errors.addressLine1}
+                sx={{ gridColumn: "span 3" }}
+              />
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Address Line 2 (Optional)"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.addressLine2}
+                name="addressLine2"
+                error={!!touched.addressLine2 && !!errors.addressLine2}
+                helperText={touched.addressLine2 && errors.addressLine2}
                 sx={{ gridColumn: "span 2" }}
               />
 
@@ -175,14 +290,28 @@ const UserForm = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Address"
+                label="City"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.address}
-                name="address"
-                error={!!touched.address && !!errors.address}
-                helperText={touched.address && errors.address}
-                sx={{ gridColumn: "span 4" }}
+                value={values.city}
+                name="city"
+                error={!!touched.city && !!errors.city}
+                helperText={touched.city && errors.city}
+                sx={{ gridColumn: "span 1" }}
+              />
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Zip Code"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.zipCode}
+                name="zipCode"
+                error={!!touched.zipCode && !!errors.zipCode}
+                helperText={touched.zipCode && errors.zipCode}
+                sx={{ gridColumn: "span 1" }}
               />
             </Box>
 
