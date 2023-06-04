@@ -28,13 +28,17 @@ const Users = () => {
       headerAlign: "left",
       align: "left",
     },
+    { field: "gender", headerName: "GENDER", flex: 0.3 },
     { field: "age", headerName: "AGE", flex: 0.2 },
-    { field: "phone", headerName: "PHONE", flex: 0.5 },
+    { field: "mobile", headerName: "PHONE", flex: 0.3 },
+    { field: "telephone", headerName: "TELEPHONE", flex: 0.3 },
+    { field: "address", headerName: "ADDRESS", flex: 0.5 },
+    { field: "zipCode", headerName: "ZIP CODE", flex: 0.2 },
     {
-      field: "access",
-      headerName: "ACCESS",
+      field: "role",
+      headerName: "ROLE",
       flex: 0.5,
-      renderCell: ({ row: { access } }) => {
+      renderCell: ({ row: { role } }) => {
         return (
           <Box
             width="50%"
@@ -42,17 +46,17 @@ const Users = () => {
             display="flex"
             justifyContent="center"
             backgroundColor={
-              access === "admin"
+              role === "admin"
                 ? colors.greenAccent[600]
                 : colors.greenAccent[700]
             }
             borderRadius="4px"
           >
-            {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-            {access === "manager" && <SecurityOutlinedIcon />}
-            {access === "user" && <LockOpenOutlinedIcon />}
+            {role === "admin" && <AdminPanelSettingsOutlinedIcon />}
+            {role === "manager" && <SecurityOutlinedIcon />}
+            {role === "user" && <LockOpenOutlinedIcon />}
             <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {access}
+              {role}
             </Typography>
           </Box>
         );

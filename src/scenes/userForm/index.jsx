@@ -170,8 +170,8 @@ const UserForm = () => {
                   <MenuItem value="admin" label="Select role">
                     Admin
                   </MenuItem>
-                  <MenuItem value="buyer" label="Select role">
-                    Buyer
+                  <MenuItem value="user" label="Select role">
+                    User
                   </MenuItem>
                 </Select>
               </FormControl>
