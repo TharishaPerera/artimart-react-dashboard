@@ -1,12 +1,15 @@
 import React from "react";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, IconButton } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { tokens } from "../../theme";
-import { mockDataTeam } from "../../data/mockData";
+import { tokens } from "../../../theme";
+import { mockDataTeam } from "../../../data/mockData";
+import Header from "../../../components/Header";
+
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
-import Header from "../../components/Header";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const Users = () => {
   const theme = useTheme();
@@ -62,6 +65,45 @@ const Users = () => {
         );
       },
     },
+    {
+      field: "action",
+      headerName: "ACTION",
+      flex: 0.5,
+      disableClickEventBubbling: true,
+      renderCell: ({ row: { id } }) => {
+        const handleEdit = (e) => {
+          e.stopPropagation();
+          var base_url = window.location.origin;
+          
+          window.location.replace(base_url + '/users/update/' + id);
+        } 
+
+        const handleDelete = (e) => {
+          e.stopPropagation();
+          console.log(id);
+          alert(id);
+        } 
+
+        return (
+          <>
+            <Box>
+              <IconButton onClick={handleEdit}>
+                <BorderColorIcon
+                  sx={{ fontSize: "26p", color: colors.greenAccent[500] }}
+                />
+              </IconButton>
+            </Box>
+            <Box>
+              <IconButton onClick={handleDelete}>
+                <DeleteOutlineIcon
+                  sx={{ fontSize: "26p", color: colors.greenAccent[500] }}
+                />
+              </IconButton>
+            </Box>
+          </>
+        );
+      },
+    },
   ];
 
   return (
@@ -80,10 +122,14 @@ const Users = () => {
           // Grid Toolbar styles
           "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
             color: `${colors.grey[100]} !important`,
-          }
+          },
         }}
       >
-        <DataGrid rows={mockDataTeam} columns={columns} components={{ Toolbar: GridToolbar }} />
+        <DataGrid
+          rows={mockDataTeam}
+          columns={columns}
+          components={{ Toolbar: GridToolbar }}
+        />
       </Box>
     </Box>
   );

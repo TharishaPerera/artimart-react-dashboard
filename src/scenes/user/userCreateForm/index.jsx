@@ -11,9 +11,9 @@ import {
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Header from "../../components/Header";
+import Header from "../../../components/Header";
 
-const UserForm = () => {
+const UserCreateForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const initialValues = {
@@ -327,4 +327,4 @@ const UserForm = () => {
   );
 };
 
-export default UserForm;
+export default UserCreateForm;

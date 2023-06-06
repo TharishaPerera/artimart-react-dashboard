@@ -167,6 +167,14 @@ const Sidebar = () => {
             />
 
             <Item
+              title="Update Users"
+              to="/users/update"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            {/* <Item
               title="Contact Information"
               to="/contacts"
               icon={<ContactsOutlinedIcon />}
@@ -180,7 +188,7 @@ const Sidebar = () => {
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
 
             <Typography
               variant="h6"
