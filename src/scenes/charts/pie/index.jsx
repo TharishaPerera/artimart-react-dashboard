@@ -1,7 +1,7 @@
 import React from "react";
-import PieChart from "../../components/PieChart";
+import PieChart from "../../../components/PieChart";
 import { Box } from "@mui/material";
-import Header from "../../components/Header";
+import Header from "../../../components/Header";
 
 const Pie = () => {
   return (

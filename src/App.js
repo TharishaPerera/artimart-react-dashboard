@@ -13,10 +13,10 @@ import Contacts from "./scenes/contacts";
 import Form from "./scenes/form";
 import Calendar from "./scenes/calendar";
 import FAQ from "./scenes/faq";
-import Bar from "./scenes/bar";
-import Pie from "./scenes/pie";
-import Line from "./scenes/line";
-import Geography from "./scenes/geography";
+import Bar from "./scenes/charts/bar";
+import Pie from "./scenes/charts/pie";
+import Line from "./scenes/charts/line";
+import Geography from "./scenes/charts/geography";
 
 function App() {
   const [theme, colorMode] = useMode();

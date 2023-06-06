@@ -1,6 +1,6 @@
 import React from 'react'
-import LineChart from '../../components/LineChart'
-import Header from '../../components/Header'
+import LineChart from '../../../components/LineChart'
+import Header from '../../../components/Header'
 import { Box } from '@mui/material'
 
 const Line = () => {
