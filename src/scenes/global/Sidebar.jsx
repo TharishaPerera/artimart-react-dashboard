@@ -7,7 +7,11 @@ import { tokens } from "../../theme";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import ChecklistIcon from "@mui/icons-material/Checklist";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
@@ -200,6 +204,39 @@ const Sidebar = () => {
               sx={{ m: "15px 0 5px 20px" }}
             >
               ITEMS
+            </Typography>
+
+            <Item
+              title="Orders"
+              to="/orders"
+              icon={<ChecklistIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
+              title="Listings"
+              to="/listings"
+              icon={<FormatListBulletedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
+              title="Add Listing"
+              to="/listings/create"
+              icon={<PlaylistAddIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              letterSpacing={2}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              OTHER
             </Typography>
 
             <Item
