@@ -208,7 +208,7 @@ const Dashboard = () => {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            borderBottom={`4px solid ${colors.primary[500]}`}
+            borderBottom={`4px solid ${colors.primary[700]}`}
             colors={colors.grey[100]}
             p="15px"
           >
@@ -222,7 +222,7 @@ const Dashboard = () => {
               display="flex"
               justifyContent="space-between"
               alignItems="center"
-              borderBottom={`4px solid ${colors.primary[500]}`}
+              borderBottom={`4px solid ${colors.primary[700]}`}
               p="15px"
             >
               <Box>
@@ -263,7 +263,7 @@ const Dashboard = () => {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            borderBottom={`4px solid ${colors.primary[500]}`}
+            borderBottom={`4px solid ${colors.primary[700]}`}
             colors={colors.grey[100]}
             p="15px"
           >
@@ -277,7 +277,7 @@ const Dashboard = () => {
               display="flex"
               justifyContent="space-between"
               alignItems="center"
-              borderBottom={`4px solid ${colors.primary[500]}`}
+              borderBottom={`4px solid ${colors.primary[700]}`}
               p="15px"
             >
               <Box>
