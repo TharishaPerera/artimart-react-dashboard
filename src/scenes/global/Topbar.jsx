@@ -11,6 +11,7 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 
 import AccountMenu from "../../components/AccountMenu";
+import NotificationMenu from "../../components/NotificationMenu";
 
 const Topbar = () => {
   const theme = useTheme();
@@ -43,11 +44,13 @@ const Topbar = () => {
             )
           }
         </IconButton>
-        <IconButton>
+        {/* <IconButton>
           <Badge badgeContent={1} color="primary">
             <NotificationOutlinedIcon />
           </Badge>
-        </IconButton>
+        </IconButton> */}
+
+        <NotificationMenu />
         <IconButton>
           <SettingsOutlinedIcon />
         </IconButton>
