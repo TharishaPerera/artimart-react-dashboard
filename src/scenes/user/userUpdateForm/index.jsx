@@ -7,15 +7,22 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  InputBase,
+  IconButton,
+  useTheme,
 } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../../components/Header";
+import SearchIcon from "@mui/icons-material/Search";
+import { tokens } from "../../../theme";
 
 const UserUpdateForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
-
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -69,8 +76,27 @@ const UserUpdateForm = () => {
 
   return (
     <Box m="20px">
-      <Box ml="-20px">
+      <Box
+        mt="-20px"
+        ml="-20px"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Header title="Update User" subtitle="Update User Data" />
+        <Box>
+          <Box
+            display="flex"
+            backgroundColor={colors.primary[400]}
+            borderRadius="5px"
+            width={300}
+          >
+            <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Enter User ID" />
+            <IconButton type="butoon" sx={{ p: 1 }}>
+              <SearchIcon />
+            </IconButton>
+          </Box>
+        </Box>
       </Box>
       <Formik
         onSubmit={handleFormSubmit}
