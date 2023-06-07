@@ -1,7 +1,7 @@
 import { React, useContext } from "react";
 import { Box, IconButton, useTheme } from "@mui/material";
 import Badge from '@mui/material/Badge';
-import { ColorModeContext, tokens } from "../../theme";
+import { ColorModeContext, tokens } from "../theme";
 import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
@@ -10,8 +10,8 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 
-import AccountMenu from "../../components/AccountMenu";
-import NotificationMenu from "../../components/NotificationMenu";
+import AccountMenu from "./AccountMenu";
+import NotificationMenu from "./NotificationMenu";
 
 const Topbar = () => {
   const theme = useTheme();
