@@ -89,7 +89,7 @@ const UserCreateForm = () => {
             <Box
               display="grid"
               gap="20px"
-              gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+              gridTemplateColumns="repeat(8, minmax(0, 1fr))"
               sx={{
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
               }}
@@ -126,6 +126,20 @@ const UserCreateForm = () => {
                 fullWidth
                 variant="filled"
                 type="text"
+                label="House Number"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.houseNo}
+                name="houseNo"
+                error={!!touched.houseNo && !!errors.houseNo}
+                helperText={touched.houseNo && errors.houseNo}
+                sx={{ gridColumn: "span 4" }}
+              />
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
                 label="Email"
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -133,7 +147,21 @@ const UserCreateForm = () => {
                 name="email"
                 error={!!touched.email && !!errors.email}
                 helperText={touched.email && errors.email}
-                sx={{ gridColumn: "span 2" }}
+                sx={{ gridColumn: "span 4" }}
+              />
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Address Line 1"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.addressLine1}
+                name="addressLine1"
+                error={!!touched.addressLine1 && !!errors.addressLine1}
+                helperText={touched.addressLine1 && errors.addressLine1}
+                sx={{ gridColumn: "span 4" }}
               />
 
               <TextField
@@ -147,34 +175,22 @@ const UserCreateForm = () => {
                 name="password"
                 error={!!touched.password && !!errors.password}
                 helperText={touched.password && errors.password}
-                sx={{ gridColumn: "span 1" }}
+                sx={{ gridColumn: "span 4" }}
               />
 
-              <FormControl sx={{ gridColumn: "span 1" }}>
-                <InputLabel id="role-select" sx={{ lineHeight: 4.5 }}>
-                  Role
-                </InputLabel>
-                <Select
-                  labelId="role-select"
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Role"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.role}
-                  name="role"
-                  error={!!touched.role && !!errors.role}
-                  helperText={touched.role && errors.role}
-                >
-                  <MenuItem value="admin" label="Select role">
-                    Admin
-                  </MenuItem>
-                  <MenuItem value="user" label="Select role">
-                    User
-                  </MenuItem>
-                </Select>
-              </FormControl>
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Address Line 2 (Optional)"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.addressLine2}
+                name="addressLine2"
+                error={!!touched.addressLine2 && !!errors.addressLine2}
+                helperText={touched.addressLine2 && errors.addressLine2}
+                sx={{ gridColumn: "span 4" }}
+              />
 
               <TextField
                 fullWidth
@@ -216,6 +232,47 @@ const UserCreateForm = () => {
                 </Select>
               </FormControl>
 
+              <FormControl sx={{ gridColumn: "span 2" }}>
+                <InputLabel id="role-select" sx={{ lineHeight: 4.5 }}>
+                  Role
+                </InputLabel>
+                <Select
+                  labelId="role-select"
+                  fullWidth
+                  variant="filled"
+                  type="text"
+                  label="Role"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.role}
+                  name="role"
+                  error={!!touched.role && !!errors.role}
+                  helperText={touched.role && errors.role}
+                >
+                  <MenuItem value="admin" label="Select role">
+                    Admin
+                  </MenuItem>
+                  <MenuItem value="user" label="Select role">
+                    User
+                  </MenuItem>
+                </Select>
+              </FormControl>
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="City"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.city}
+                name="city"
+                error={!!touched.city && !!errors.city}
+                helperText={touched.city && errors.city}
+                sx={{ gridColumn: "span 4" }}
+              />
+
+
               <TextField
                 fullWidth
                 variant="filled"
@@ -227,7 +284,7 @@ const UserCreateForm = () => {
                 name="telephoneMobile"
                 error={!!touched.telephoneMobile && !!errors.telephoneMobile}
                 helperText={touched.telephoneMobile && errors.telephoneMobile}
-                sx={{ gridColumn: "span 1" }}
+                sx={{ gridColumn: "span 2" }}
               />
 
               <TextField
@@ -241,64 +298,9 @@ const UserCreateForm = () => {
                 name="telephoneHome"
                 error={!!touched.telephoneHome && !!errors.telephoneHome}
                 helperText={touched.telephoneHome && errors.telephoneHome}
-                sx={{ gridColumn: "span 1" }}
-              />
-
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="House Number"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.houseNo}
-                name="houseNo"
-                error={!!touched.houseNo && !!errors.houseNo}
-                helperText={touched.houseNo && errors.houseNo}
-                sx={{ gridColumn: "span 1" }}
-              />
-
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Address Line 1"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.addressLine1}
-                name="addressLine1"
-                error={!!touched.addressLine1 && !!errors.addressLine1}
-                helperText={touched.addressLine1 && errors.addressLine1}
-                sx={{ gridColumn: "span 3" }}
-              />
-
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Address Line 2 (Optional)"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.addressLine2}
-                name="addressLine2"
-                error={!!touched.addressLine2 && !!errors.addressLine2}
-                helperText={touched.addressLine2 && errors.addressLine2}
                 sx={{ gridColumn: "span 2" }}
               />
 
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="City"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.city}
-                name="city"
-                error={!!touched.city && !!errors.city}
-                helperText={touched.city && errors.city}
-                sx={{ gridColumn: "span 1" }}
-              />
 
               <TextField
                 fullWidth
@@ -311,7 +313,7 @@ const UserCreateForm = () => {
                 name="zipCode"
                 error={!!touched.zipCode && !!errors.zipCode}
                 helperText={touched.zipCode && errors.zipCode}
-                sx={{ gridColumn: "span 1" }}
+                sx={{ gridColumn: "span 4" }}
               />
             </Box>
 
