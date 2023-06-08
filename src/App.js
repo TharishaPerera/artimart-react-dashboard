@@ -24,6 +24,8 @@ import Bar from "./scenes/charts/bar";
 import Pie from "./scenes/charts/pie";
 import Line from "./scenes/charts/line";
 import Geography from "./scenes/charts/geography";
+import UpdateItem from "./scenes/items/updateItem";
+import ViewOrder from "./scenes/items/viewOrder";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -47,8 +49,10 @@ function App() {
               {/* <Route path="/invoices" element={<Invoices />} /> */}
               
               <Route path="/orders" element={<Orders />} />
+              <Route path="/orders/view" element={<ViewOrder />} />
               <Route path="/listings" element={<Items />} />
               <Route path="/listings/create" element={<CreateItem />} />
+              <Route path="/listings/update" element={<UpdateItem />} />
               
               <Route path="/form" element={<Form />} />
               <Route path="/calendar" element={<Calendar />} />

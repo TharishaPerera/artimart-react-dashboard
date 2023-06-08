@@ -199,7 +199,7 @@ const Dashboard = () => {
         {/* Transactions */}
         <Box
           gridColumn="span 4"
-          gridRow="span 4"
+          gridRow="span 5"
           backgroundColor={colors.primary[400]}
           overflow="auto"
           borderRadius="10px"
@@ -254,7 +254,7 @@ const Dashboard = () => {
         {/* ROW 3 */}
         <Box
           gridColumn="span 8"
-          gridRow="span 2"
+          gridRow="span 3"
           backgroundColor={colors.primary[400]}
           overflow="auto"
           borderRadius="10px"

@@ -23,6 +23,8 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -181,22 +183,6 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            {/* <Item
-              title="Contact Information"
-              to="/contacts"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Item
-              title="Invoices"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
-
             <Typography
               variant="h6"
               color={colors.grey[300]}
@@ -215,6 +201,22 @@ const Sidebar = () => {
             />
 
             <Item
+              title="View Order"
+              to="/orders/view"
+              icon={<ReceiptOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            {/* <Item
+              title="Update Order"
+              to="/orders/update"
+              icon={<WidgetsOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            /> */}
+
+            <Item
               title="Listings"
               to="/listings"
               icon={<FormatListBulletedIcon />}
@@ -230,7 +232,23 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            <Typography
+            <Item
+              title="Update Listing"
+              to="/listings/update"
+              icon={<MenuOpenIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            {/* <Item
+              title="Invoices"
+              to="/invoices"
+              icon={<ReceiptOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            /> */}
+
+            {/* <Typography
               variant="h6"
               color={colors.grey[300]}
               letterSpacing={2}
@@ -261,7 +279,7 @@ const Sidebar = () => {
               icon={<HelpOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
 
             <Typography
               variant="h6"
