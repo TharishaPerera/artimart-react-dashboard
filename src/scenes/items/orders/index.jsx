@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography, useTheme, IconButton, Tooltip } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../../theme";
@@ -15,6 +15,11 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 const Orders = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  // change title
+  useEffect(() => {
+    document.title = "Orders | ARTIMART";
+  });
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.2 },

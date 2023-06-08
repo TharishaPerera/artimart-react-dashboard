@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -21,6 +21,11 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const CreateItem = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  // change title
+  useEffect(() => {
+    document.title = "Create Listing | ARTIMART";
+  });
 
   const initialValues = {
     category: "default",
@@ -240,12 +245,12 @@ const CreateItem = () => {
                     className="images"
                   >
                     {selectedImages &&
-                      selectedImages.slice(0,6).map((image) => {
+                      selectedImages.slice(0, 6).map((image) => {
                         return (
                           <Box key={image} className="image-container">
                             <IconButton
                               className="remove-btn"
-                              sx={{ position: "absolute"}}
+                              sx={{ position: "absolute" }}
                               color="primary"
                               variant="filled"
                               onClick={() =>

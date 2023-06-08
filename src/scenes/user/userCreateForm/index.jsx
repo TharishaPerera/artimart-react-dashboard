@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Button,
@@ -15,6 +15,11 @@ import Header from "../../../components/Header";
 
 const UserCreateForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  // change title
+  useEffect(() => {
+    document.title = "Create Users | ARTIMART";
+  });
 
   const initialValues = {
     firstName: "",
@@ -272,7 +277,6 @@ const UserCreateForm = () => {
                 sx={{ gridColumn: "span 4" }}
               />
 
-
               <TextField
                 fullWidth
                 variant="filled"
@@ -300,7 +304,6 @@ const UserCreateForm = () => {
                 helperText={touched.telephoneHome && errors.telephoneHome}
                 sx={{ gridColumn: "span 2" }}
               />
-
 
               <TextField
                 fullWidth

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography, useTheme, IconButton } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../../theme";
@@ -9,11 +9,16 @@ import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettin
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 const Users = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  // change title
+  useEffect(() => {
+    document.title = "Users | ARTIMART";
+  });
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.2 },
@@ -74,15 +79,15 @@ const Users = () => {
         const handleEdit = (e) => {
           e.stopPropagation();
           var base_url = window.location.origin;
-          
-          window.location.replace(base_url + '/users/update/' + id);
-        } 
+
+          window.location.replace(base_url + "/users/update/" + id);
+        };
 
         const handleDelete = (e) => {
           e.stopPropagation();
           console.log(id);
           alert(id);
-        } 
+        };
 
         return (
           <>

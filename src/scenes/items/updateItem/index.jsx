@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -26,6 +26,11 @@ const UpdateItem = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  // change title
+  useEffect(() => {
+    document.title = "Update Listings | ARTIMART";
+  });
 
   const initialValues = {
     category: "default",
@@ -74,7 +79,10 @@ const UpdateItem = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Header title="Update Item" subtitle="Update An Existing Listing Data" />
+        <Header
+          title="Update Item"
+          subtitle="Update An Existing Listing Data"
+        />
         <Box>
           <Box
             display="flex"
@@ -268,7 +276,7 @@ const UpdateItem = () => {
                           <Box key={image} className="image-container">
                             <IconButton
                               className="remove-btn"
-                              sx={{ position: "absolute"}}
+                              sx={{ position: "absolute" }}
                               color="primary"
                               variant="filled"
                               onClick={() =>

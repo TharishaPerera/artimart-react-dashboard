@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Button,
@@ -22,7 +22,12 @@ const UserUpdateForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  
+
+  // change title
+  useEffect(() => {
+    document.title = "Update Users | ARTIMART";
+  });
+
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -298,7 +303,6 @@ const UserUpdateForm = () => {
                 sx={{ gridColumn: "span 4" }}
               />
 
-
               <TextField
                 fullWidth
                 variant="filled"
@@ -326,7 +330,6 @@ const UserUpdateForm = () => {
                 helperText={touched.telephoneHome && errors.telephoneHome}
                 sx={{ gridColumn: "span 2" }}
               />
-
 
               <TextField
                 fullWidth

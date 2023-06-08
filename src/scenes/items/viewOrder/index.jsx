@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
 const ViewOrder = () => {
-  return (
-    <div>ViewOrder</div>
-  )
-}
+  // change title
+  useEffect(() => {
+    document.title = "View Orders | ARTIMART";
+  });
 
-export default ViewOrder
+  return <div>ViewOrder</div>;
+};
+
+export default ViewOrder;
