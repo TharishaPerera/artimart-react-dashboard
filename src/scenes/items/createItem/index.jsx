@@ -24,7 +24,7 @@ const CreateItem = () => {
 
   // change title
   useEffect(() => {
-    document.title = "Create Listing | ARTIMART";
+    document.title = "Create Product | ARTIMART";
   });
 
   const initialValues = {
@@ -39,7 +39,7 @@ const CreateItem = () => {
   const itemSchema = yup.object().shape({
     category: yup.string().required("Category field cannot be empty. "),
     price: yup.number().min(0).required("Price field cannot be empty."),
-    itemName: yup.string().required("Item name field cannot be empty."),
+    itemName: yup.string().required("Product name field cannot be empty."),
     smallDescription: yup
       .string()
       .required("Small description field cannot be empty."),
@@ -69,7 +69,7 @@ const CreateItem = () => {
   return (
     <Box m="20px">
       <Box ml="-20px">
-        <Header title="Create Item" subtitle="Add A New Listing" />
+        <Header title="Create Product" subtitle="Add a new product" />
       </Box>
       <Formik
         onSubmit={handleFormSubmit}
@@ -154,7 +154,7 @@ const CreateItem = () => {
                     error={!!touched.price && !!errors.price}
                     helperText={touched.price && errors.price}
                     startAdornment={
-                      <InputAdornment position="start">$</InputAdornment>
+                      <InputAdornment position="start">LKR</InputAdornment>
                     }
                   />
                 </FormControl>
@@ -163,7 +163,7 @@ const CreateItem = () => {
                   fullWidth
                   variant="filled"
                   type="text"
-                  label="Item Name"
+                  label="Product Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.itemName}
@@ -176,7 +176,7 @@ const CreateItem = () => {
                   fullWidth
                   variant="filled"
                   type="text"
-                  label="Small Description"
+                  label="Product Description"
                   multiline
                   rows={8}
                   onBlur={handleBlur}
@@ -191,21 +191,45 @@ const CreateItem = () => {
                   }
                   sx={{ gridColumn: "span 4" }}
                 />
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Long Description"
-                  multiline
-                  rows={8}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.longDescription}
-                  name="longDescription"
-                  error={!!touched.longDescription && !!errors.longDescription}
-                  helperText={touched.longDescription && errors.longDescription}
-                  sx={{ gridColumn: "span 4" }}
-                />
+
+                <FormControl sx={{ gridColumn: "span 2" }} variant="filled">
+                  <InputLabel htmlFor="filled-adornment-quantity">
+                    Quantity
+                  </InputLabel>
+                  <FilledInput
+                    id="filled-adornment-quantity"
+                    type="number"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.quantity}
+                    name="quantity"
+                    error={!!touched.quantity && !!errors.quantity}
+                    helperText={touched.quantity && errors.quantity}
+                    startAdornment={
+                      <InputAdornment position="start">PCS</InputAdornment>
+                    }
+                  />
+                </FormControl>
+
+                <FormControl sx={{ gridColumn: "span 2" }} variant="filled">
+                  <InputLabel htmlFor="filled-adornment-dimension">
+                    Dimension (Size)
+                  </InputLabel>
+                  <FilledInput
+                    id="filled-adornment-dimension"
+                    type="string"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.dimension}
+                    name="dimension"
+                    error={!!touched.dimension && !!errors.dimension}
+                    helperText={touched.dimension && errors.dimension}
+                    startAdornment={
+                      <InputAdornment position="start">IN</InputAdornment>
+                    }
+                  />
+                </FormControl>
+
               </Box>
 
               <Box
@@ -281,7 +305,7 @@ const CreateItem = () => {
 
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Create Item
+                Create Product
               </Button>
             </Box>
           </form>

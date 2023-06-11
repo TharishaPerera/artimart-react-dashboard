@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
 import {
   Box,
   Button,
@@ -16,26 +17,38 @@ import Header from "../../../components/Header";
 const UserCreateForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  // change title
+  const [customerFirstName, setCustomerFirstName] = useState('');
+  const [customerLastName, setCustomerLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('');
+  const [phone, setPhone] = useState('');
+  const [userRole, setUserRole] = useState('');
+  const [house, setHouse] = useState('');
+  const [addressLine1, setAddressLine1] = useState('');
+  const [addressLine2, setAddressLine2] = useState('');
+  const [city, setCity] = useState('');
+  const [zipCode, setZipCode] = useState('');
+
   useEffect(() => {
     document.title = "Create Users | ARTIMART";
   });
 
   const initialValues = {
-    firstName: "",
-    lastName: "",
+    customerFirstName: "",
+    customerLastName: "",
     email: "",
     password: "",
-    age: 0,
-    gender: "male",
-    telephoneMobile: "",
-    telephoneHome: "",
-    houseNo: "",
+    age: "",
+    gender: "Male",
+    phone: "",
+    house: "",
     addressLine1: "",
     addressLine2: "",
     city: "",
     zipCode: "",
-    role: "admin",
+    userRole: "Customer",
   };
 
   const phoneRegExp = /^(\+\d{1,2}\s)?\(?\d{3}\)?\d{3}\d{4}$/;
@@ -44,8 +57,8 @@ const UserCreateForm = () => {
     "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&]).{8}$";
 
   const userSchema = yup.object().shape({
-    firstName: yup.string().required("First name field cannot be empty."),
-    lastName: yup.string().required("Last name field cannot be empty."),
+    customerFirstName: yup.string().required("First name field cannot be empty."),
+    customerLastName: yup.string().required("Last name field cannot be empty."),
     email: yup
       .string()
       .email("Invalid email address.")
@@ -54,13 +67,12 @@ const UserCreateForm = () => {
     // .matches(passwordRegExp, "Password should have atleast 1 uppercase, 1 lowercase, 1 number & 8 characters minimum.")
     age: yup.number().required("Age field cannot be empty."),
     gender: yup.string().required("Gender field cannot be empty. "),
-    telephoneMobile: yup
+    phone: yup
       .string()
       .matches(phoneRegExp, "Invalid phone number.")
       .required("Telephone number field cannot be empty."),
-    telephoneHome: yup.string().matches(phoneRegExp, "Invalid phone number."),
-    role: yup.string().required("Role field cannot be empty."),
-    houseNo: yup.string().required("House number field cannot be empty."),
+    userRole: yup.string().required("Role field cannot be empty."),
+    house: yup.string().required("House number field cannot be empty."),
     addressLine1: yup
       .string()
       .required("Address Line 1 field cannot be empty."),
@@ -68,9 +80,30 @@ const UserCreateForm = () => {
     zipCode: yup.string().required("Zip code field cannot be empty."),
   });
 
-  const handleFormSubmit = (values) => {
-    console.log(values);
-  };
+  // const handleFormSubmit = (values) => {
+  //   console.log(values);
+  // };
+
+  const handleSubmit = async (e) => {
+    //e.preventDefault();
+    try{
+      const response = Axios.post("http://localhost:5000/api/customers/register", {
+        customerFirstName,
+        customerLastName,
+        email,
+        password,
+        age,
+        gender,
+        phone,
+        userRole,
+        house, addressLine1, addressLine2, city, zipCode
+      });
+      console.log(response.data);
+    }catch(error){
+      console.log(error.response)
+    }
+    console.log("Im in!")
+  }
 
   return (
     <Box m="20px">
@@ -78,7 +111,7 @@ const UserCreateForm = () => {
         <Header title="Create User" subtitle="Create A New User Account" />
       </Box>
       <Formik
-        onSubmit={handleFormSubmit}
+        onSubmit={handleSubmit}
         initialValues={initialValues}
         validationSchema={userSchema}
       >
@@ -105,11 +138,11 @@ const UserCreateForm = () => {
                 type="text"
                 label="First Name"
                 onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.firstName}
-                name="firstName"
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
+                onChange={(e) => setCustomerFirstName(e.target.value)}
+                value={customerFirstName}
+                name="customerFirstName"
+                error={!!touched.customerFirstName && !!errors.customerFirstName}
+                helperText={touched.customerFirstName && errors.customerFirstName}
                 sx={{ gridColumn: "span 2" }}
               />
 
@@ -119,11 +152,11 @@ const UserCreateForm = () => {
                 type="text"
                 label="Last Name"
                 onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.lastName}
-                name="lastName"
-                error={!!touched.lastName && !!errors.lastName}
-                helperText={touched.lastName && errors.lastName}
+                onChange={(e) => setCustomerLastName(e.target.value)}
+                value={customerLastName}
+                name="customerLastName"
+                error={!!touched.customerLastName && !!errors.customerLastName}
+                helperText={touched.customerLastName && errors.customerLastName}
                 sx={{ gridColumn: "span 2" }}
               />
 
@@ -133,11 +166,11 @@ const UserCreateForm = () => {
                 type="text"
                 label="House Number"
                 onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.houseNo}
-                name="houseNo"
-                error={!!touched.houseNo && !!errors.houseNo}
-                helperText={touched.houseNo && errors.houseNo}
+                onChange={(e) => setHouse(e.target.value)}
+                value={house}
+                name="house"
+                error={!!touched.house && !!errors.house}
+                helperText={touched.house && errors.house}
                 sx={{ gridColumn: "span 4" }}
               />
 
@@ -147,8 +180,8 @@ const UserCreateForm = () => {
                 type="text"
                 label="Email"
                 onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.email}
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 name="email"
                 error={!!touched.email && !!errors.email}
                 helperText={touched.email && errors.email}
@@ -161,8 +194,8 @@ const UserCreateForm = () => {
                 type="text"
                 label="Address Line 1"
                 onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.addressLine1}
+                onChange={(e) => setAddressLine1(e.target.value)}
+                value={addressLine1}
                 name="addressLine1"
                 error={!!touched.addressLine1 && !!errors.addressLine1}
                 helperText={touched.addressLine1 && errors.addressLine1}
@@ -175,8 +208,8 @@ const UserCreateForm = () => {
                 type="password"
                 label="Password"
                 onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.password}
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
                 name="password"
                 error={!!touched.password && !!errors.password}
                 helperText={touched.password && errors.password}
@@ -189,8 +222,8 @@ const UserCreateForm = () => {
                 type="text"
                 label="Address Line 2 (Optional)"
                 onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.addressLine2}
+                onChange={(e) => setAddressLine2(e.target.value)}
+                value={addressLine2}
                 name="addressLine2"
                 error={!!touched.addressLine2 && !!errors.addressLine2}
                 helperText={touched.addressLine2 && errors.addressLine2}
@@ -203,15 +236,15 @@ const UserCreateForm = () => {
                 type="number"
                 label="Age"
                 onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.age}
+                onChange={(e) => setAge(e.target.value)}
+                value={age}
                 name="age"
                 error={!!touched.age && !!errors.age}
                 helperText={touched.age && errors.age}
-                sx={{ gridColumn: "span 1" }}
+                sx={{ gridColumn: "span 2" }}
               />
 
-              <FormControl sx={{ gridColumn: "span 1" }}>
+              <FormControl sx={{ gridColumn: "span 2" }}>
                 <InputLabel id="gender-select" sx={{ lineHeight: 4.5 }}>
                   Gender
                 </InputLabel>
@@ -222,20 +255,48 @@ const UserCreateForm = () => {
                   type="text"
                   label="Gender"
                   onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.gender}
+                  onChange={(e) => setGender(e.target.value)}
+                  value={gender}
                   name="gender"
                   error={!!touched.gender && !!errors.gender}
                   helperText={touched.gender && errors.gender}
                 >
-                  <MenuItem value="male" label="Male">
+                  <MenuItem value="Male" label="Male">
                     Male
                   </MenuItem>
-                  <MenuItem value="female" label="Female">
+                  <MenuItem value="Female" label="Female">
                     Female
                   </MenuItem>
                 </Select>
               </FormControl>
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="City"
+                onBlur={handleBlur}
+                onChange={(e) => setCity(e.target.value)}
+                value={city}
+                name="city"
+                error={!!touched.city && !!errors.city}
+                helperText={touched.city && errors.city}
+                sx={{ gridColumn: "span 4" }}
+              />
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Phone Number"
+                onBlur={handleBlur}
+                onChange={(e) => setPhone(e.target.value)}
+                value={phone}
+                name="phone"
+                error={!!touched.phone && !!errors.phone}
+                helperText={touched.phone && errors.phone}
+                sx={{ gridColumn: "span 2" }}
+              />
 
               <FormControl sx={{ gridColumn: "span 2" }}>
                 <InputLabel id="role-select" sx={{ lineHeight: 4.5 }}>
@@ -248,17 +309,20 @@ const UserCreateForm = () => {
                   type="text"
                   label="Role"
                   onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.role}
-                  name="role"
-                  error={!!touched.role && !!errors.role}
-                  helperText={touched.role && errors.role}
+                  onChange={(e) => setUserRole(e.target.value)}
+                  value={userRole}
+                  name="userRole"
+                  error={!!touched.userRole && !!errors.userRole}
+                  helperText={touched.userRole && errors.userRole}
                 >
-                  <MenuItem value="admin" label="Select role">
+                  <MenuItem value="Admin" label="Select role">
                     Admin
                   </MenuItem>
-                  <MenuItem value="user" label="Select role">
-                    User
+                  <MenuItem value="Craftsman" label="Select role">
+                    Craftsman
+                  </MenuItem>
+                  <MenuItem value="Customer" label="Select role">
+                    Customer
                   </MenuItem>
                 </Select>
               </FormControl>
@@ -267,52 +331,10 @@ const UserCreateForm = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="City"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.city}
-                name="city"
-                error={!!touched.city && !!errors.city}
-                helperText={touched.city && errors.city}
-                sx={{ gridColumn: "span 4" }}
-              />
-
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Telephone Number (Mobile)"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.telephoneMobile}
-                name="telephoneMobile"
-                error={!!touched.telephoneMobile && !!errors.telephoneMobile}
-                helperText={touched.telephoneMobile && errors.telephoneMobile}
-                sx={{ gridColumn: "span 2" }}
-              />
-
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Telephone Number (Home)"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.telephoneHome}
-                name="telephoneHome"
-                error={!!touched.telephoneHome && !!errors.telephoneHome}
-                helperText={touched.telephoneHome && errors.telephoneHome}
-                sx={{ gridColumn: "span 2" }}
-              />
-
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
                 label="Zip Code"
                 onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.zipCode}
+                onChange={(e) => setZipCode(e.target.value)}
+                value={zipCode}
                 name="zipCode"
                 error={!!touched.zipCode && !!errors.zipCode}
                 helperText={touched.zipCode && errors.zipCode}
@@ -321,7 +343,7 @@ const UserCreateForm = () => {
             </Box>
 
             <Box display="flex" justifyContent="end" mt="20px">
-              <Button type="submit" color="secondary" variant="contained">
+              <Button type="submit" id="createUserBtn" color="secondary" variant="contained">
                 Create User
               </Button>
             </Box>

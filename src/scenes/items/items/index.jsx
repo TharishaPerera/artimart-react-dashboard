@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
 import { Box, Typography, useTheme, IconButton } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../../theme";
@@ -15,105 +16,52 @@ const Items = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  // change title
+  const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const getProducts = async () => {
+    try{
+      const data = await Axios.get("http://localhost:5000/api/products");
+      console.log(data.data);
+      setProducts(data.data);
+    }catch(error){
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
-    document.title = "Listings | ARTIMART";
-  });
+    document.title = "Products | ARTIMART";
+
+    getProducts();
+    
+  }, []);
 
   const columns = [
-    { field: "id", headerName: "ID", flex: 0.2 },
+    { field: "_id", headerName: "ID", flex: 0.2 },
     {
-      field: "name",
-      headerName: "NAME",
+      field: "productName",
+      headerName: "PRODUCT NAME",
       flex: 0.5,
       cellClassName: "name-column--cell",
     },
     {
-      field: "email",
-      headerName: "EMAIL",
-      flex: 0.5,
-      type: "number",
+      field: "description",
+      headerName: "DESCRIPTION",
+      flex: 1.0,
       headerAlign: "left",
       align: "left",
     },
-    { field: "gender", headerName: "GENDER", flex: 0.3 },
-    { field: "age", headerName: "AGE", flex: 0.2 },
-    { field: "mobile", headerName: "PHONE", flex: 0.3 },
-    { field: "telephone", headerName: "TELEPHONE", flex: 0.3 },
-    { field: "address", headerName: "ADDRESS", flex: 0.5 },
-    { field: "zipCode", headerName: "ZIP CODE", flex: 0.2 },
-    {
-      field: "role",
-      headerName: "ROLE",
-      flex: 0.5,
-      renderCell: ({ row: { role } }) => {
-        return (
-          <Box
-            width="50%"
-            p="5px"
-            display="flex"
-            justifyContent="center"
-            backgroundColor={
-              role === "admin"
-                ? colors.greenAccent[600]
-                : colors.greenAccent[700]
-            }
-            borderRadius="4px"
-          >
-            {role === "admin" && <AdminPanelSettingsOutlinedIcon />}
-            {role === "manager" && <SecurityOutlinedIcon />}
-            {role === "user" && <LockOpenOutlinedIcon />}
-            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {role}
-            </Typography>
-          </Box>
-        );
-      },
-    },
-    {
-      field: "action",
-      headerName: "ACTION",
-      flex: 0.5,
-      disableClickEventBubbling: true,
-      renderCell: ({ row: { id } }) => {
-        const handleEdit = (e) => {
-          e.stopPropagation();
-          var base_url = window.location.origin;
+    { field: "dimension", headerName: "DIMENSION", flex: 0.3 },
+    { field: "categoryName", headerName: "CATEGORY", flex: 0.5 },
+    { field: "price", headerName: "PRICE", flex: 0.3 },
+    { field: "availableQuantity", headerName: "QUANTITY", flex: 0.3 }
+    
 
-          window.location.replace(base_url + "/users/update/" + id);
-        };
-
-        const handleDelete = (e) => {
-          e.stopPropagation();
-          console.log(id);
-          alert(id);
-        };
-
-        return (
-          <>
-            <Box>
-              <IconButton onClick={handleEdit}>
-                <BorderColorIcon
-                  sx={{ fontSize: "26p", color: colors.greenAccent[500] }}
-                />
-              </IconButton>
-            </Box>
-            <Box>
-              <IconButton onClick={handleDelete}>
-                <DeleteOutlineIcon
-                  sx={{ fontSize: "26p", color: colors.greenAccent[500] }}
-                />
-              </IconButton>
-            </Box>
-          </>
-        );
-      },
-    },
   ];
 
   return (
     <Box>
-      <Header title="Items" subtitle="Item Data" />
+      <Header title="Products" subtitle="Product Data" />
       <Box
         m="0 0 5px 5px"
         height="100vh"
@@ -131,8 +79,9 @@ const Items = () => {
         }}
       >
         <DataGrid
-          rows={mockDataTeam}
+          rows={products}
           columns={columns}
+          getRowId={(row) => row._id}
           components={{ Toolbar: GridToolbar }}
         />
       </Box>

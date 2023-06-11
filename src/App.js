@@ -1,6 +1,8 @@
 import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import Axios from "axios";
 
 import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
@@ -28,6 +30,12 @@ import UpdateItem from "./scenes/items/updateItem";
 import ViewOrder from "./scenes/items/viewOrder";
 
 function App() {
+
+  useEffect(() => {
+    Axios.get('localhost:5000/api/customers')
+    .then(res => console.log(res.data)).catch(error => console.log(error))
+  }, []);
+
   const [theme, colorMode] = useMode();
 
   return (

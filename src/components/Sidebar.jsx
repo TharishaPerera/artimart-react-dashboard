@@ -123,7 +123,7 @@ const Sidebar = () => {
                   sx={{ m: "10px 0 0 0" }}
                   letterSpacing={3}
                 >
-                  Tharisha Perera
+                  Ammaar Nizam
                 </Typography>
                 <Typography
                   variant="h6"
@@ -217,7 +217,7 @@ const Sidebar = () => {
             /> */}
 
             <Item
-              title="Listings"
+              title="Available Products"
               to="/listings"
               icon={<FormatListBulletedIcon />}
               selected={selected}
@@ -225,7 +225,7 @@ const Sidebar = () => {
             />
 
             <Item
-              title="Add Listing"
+              title="Add Product"
               to="/listings/create"
               icon={<PlaylistAddIcon />}
               selected={selected}
@@ -233,7 +233,7 @@ const Sidebar = () => {
             />
 
             <Item
-              title="Update Listing"
+              title="Update Product"
               to="/listings/update"
               icon={<MenuOpenIcon />}
               selected={selected}
