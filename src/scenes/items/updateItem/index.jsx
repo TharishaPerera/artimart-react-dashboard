@@ -140,7 +140,7 @@ const UpdateItem = () => {
                     value={values.category}
                     name="category"
                     error={!!touched.category && !!errors.category}
-                    helperText={touched.category && errors.category}
+                    helpertext={touched.category && errors.category}
                   >
                     <MenuItem value="default" label="Please select a category">
                       Please select a category
@@ -178,7 +178,7 @@ const UpdateItem = () => {
                     value={values.price}
                     name="price"
                     error={!!touched.price && !!errors.price}
-                    helperText={touched.price && errors.price}
+                    helpertext={touched.price && errors.price}
                     startAdornment={
                       <InputAdornment position="start">$</InputAdornment>
                     }
@@ -195,7 +195,7 @@ const UpdateItem = () => {
                   value={values.itemName}
                   name="itemName"
                   error={!!touched.itemName && !!errors.itemName}
-                  helperText={touched.itemName && errors.itemName}
+                  helpertext={touched.itemName && errors.itemName}
                   sx={{ gridColumn: "span 4" }}
                 />
                 <TextField
@@ -212,7 +212,7 @@ const UpdateItem = () => {
                   error={
                     !!touched.smallDescription && !!errors.smallDescription
                   }
-                  helperText={
+                  helpertext={
                     touched.smallDescription && errors.smallDescription
                   }
                   sx={{ gridColumn: "span 4" }}
@@ -229,7 +229,7 @@ const UpdateItem = () => {
                   value={values.longDescription}
                   name="longDescription"
                   error={!!touched.longDescription && !!errors.longDescription}
-                  helperText={touched.longDescription && errors.longDescription}
+                  helpertext={touched.longDescription && errors.longDescription}
                   sx={{ gridColumn: "span 4" }}
                 />
               </Box>
