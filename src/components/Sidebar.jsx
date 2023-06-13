@@ -183,17 +183,25 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
+            <Item
+              title="Delete Users"
+              to="/users/delete"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
             <Typography
               variant="h6"
               color={colors.grey[300]}
               letterSpacing={2}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              ITEMS
+              MERCHANDISE
             </Typography>
 
             <Item
-              title="Orders"
+              title="All Orders"
               to="/orders"
               icon={<ChecklistIcon />}
               selected={selected}
@@ -217,7 +225,7 @@ const Sidebar = () => {
             /> */}
 
             <Item
-              title="Available Products"
+              title="All Products"
               to="/listings"
               icon={<FormatListBulletedIcon />}
               selected={selected}
@@ -240,15 +248,15 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            {/* <Item
-              title="Invoices"
-              to="/invoices"
+            <Item
+              title="Delete Product"
+              to="/listings/delete"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> */}
+            />
 
-            {/* <Typography
+            <Typography
               variant="h6"
               color={colors.grey[300]}
               letterSpacing={2}
@@ -258,7 +266,7 @@ const Sidebar = () => {
             </Typography>
 
             <Item
-              title="Profile Form"
+              title="Delivery Partners"
               to="/form"
               icon={<PersonOutlinedIcon />}
               selected={selected}
@@ -266,7 +274,15 @@ const Sidebar = () => {
             />
 
             <Item
-              title="Calendar"
+              title="Payment Details"
+              to="/faq"
+              icon={<CalendarTodayOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
+              title="Shipping Details"
               to="/calendar"
               icon={<CalendarTodayOutlinedIcon />}
               selected={selected}
@@ -274,50 +290,17 @@ const Sidebar = () => {
             />
 
             <Item
-              title="FAQ Page"
+              title="FAQ"
               to="/faq"
               icon={<HelpOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> */}
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              letterSpacing={2}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              STATS
-            </Typography>
-
-            <Item
-              title="Bar Chart"
-              to="/bar"
-              icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
             />
 
             <Item
-              title="Pie Chart"
+              title="Help"
               to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Item
-              title="Geo Chart"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
+              icon={<HelpOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

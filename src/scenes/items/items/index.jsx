@@ -21,7 +21,7 @@ const Items = () => {
 
   const getProducts = async () => {
     try{
-      const data = await Axios.get("http://localhost:5000/api/products");
+      const data = await Axios.get("https://artimart-api.up.railway.app/api/products");
       console.log(data.data);
       setProducts(data.data);
     }catch(error){

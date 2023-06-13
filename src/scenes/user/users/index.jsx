@@ -21,7 +21,7 @@ const Users = () => {
 
   const getUsers = async () => {
     try{
-      const data = await Axios.get("http://localhost:5000/api/customers");
+      const data = await Axios.get("https://artimart-api.up.railway.app/api/customers");
       console.log(data.data);
       setUsers(data.data);
     }catch(error){

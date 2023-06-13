@@ -114,7 +114,7 @@ const CreateItem = () => {
                     value={values.category}
                     name="category"
                     error={!!touched.category && !!errors.category}
-                    helpertext={touched.category && errors.category}
+                    helperText={touched.category && errors.category}
                   >
                     <MenuItem value="default" label="Please select a category">
                       Please select a category
@@ -152,7 +152,7 @@ const CreateItem = () => {
                     value={values.price}
                     name="price"
                     error={!!touched.price && !!errors.price}
-                    helpertext={touched.price && errors.price}
+                    helperText={touched.price && errors.price}
                     startAdornment={
                       <InputAdornment position="start">LKR</InputAdornment>
                     }
@@ -169,7 +169,7 @@ const CreateItem = () => {
                   value={values.itemName}
                   name="itemName"
                   error={!!touched.itemName && !!errors.itemName}
-                  helpertext={touched.itemName && errors.itemName}
+                  helperText={touched.itemName && errors.itemName}
                   sx={{ gridColumn: "span 4" }}
                 />
                 <TextField
@@ -186,7 +186,7 @@ const CreateItem = () => {
                   error={
                     !!touched.smallDescription && !!errors.smallDescription
                   }
-                  helpertext={
+                  helperText={
                     touched.smallDescription && errors.smallDescription
                   }
                   sx={{ gridColumn: "span 4" }}
@@ -204,7 +204,7 @@ const CreateItem = () => {
                     value={values.quantity}
                     name="quantity"
                     error={!!touched.quantity && !!errors.quantity}
-                    helpertext={touched.quantity && errors.quantity}
+                    helperText={touched.quantity && errors.quantity}
                     startAdornment={
                       <InputAdornment position="start">PCS</InputAdornment>
                     }
@@ -223,7 +223,7 @@ const CreateItem = () => {
                     value={values.dimension}
                     name="dimension"
                     error={!!touched.dimension && !!errors.dimension}
-                    helpertext={touched.dimension && errors.dimension}
+                    helperText={touched.dimension && errors.dimension}
                     startAdornment={
                       <InputAdornment position="start">IN</InputAdornment>
                     }

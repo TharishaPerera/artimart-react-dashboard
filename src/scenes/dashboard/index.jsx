@@ -12,9 +12,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import TrafficIcon from "@mui/icons-material/Traffic";
 
 // Charts
-import LineChart from "../../components/LineChart";
-import BarChart from "../../components/BarChart";
-import GeographyChart from "../../components/GeographyChart";
+
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
@@ -191,9 +189,6 @@ const Dashboard = () => {
             </Box>
           </Box>
 
-          <Box height="250px" mt="-20px">
-            <LineChart isDashboard={true} />
-          </Box>
         </Box>
 
         {/* Transactions */}

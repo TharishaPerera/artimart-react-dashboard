@@ -12,6 +12,7 @@ import Dashboard from "./scenes/dashboard";
 import Users from "./scenes/user/users";
 import UserCreateForm from "./scenes/user/userCreateForm";
 import UserUpdateForm from "./scenes/user/userUpdateForm";
+import UserDeleteForm from "./scenes/user/userDeleteForm";
 
 import Orders from "./scenes/items/orders";
 import Items from "./scenes/items/items";
@@ -22,11 +23,9 @@ import Contacts from "./scenes/contacts";
 import Form from "./scenes/form";
 import Calendar from "./scenes/calendar";
 import FAQ from "./scenes/faq";
-import Bar from "./scenes/charts/bar";
-import Pie from "./scenes/charts/pie";
-import Line from "./scenes/charts/line";
-import Geography from "./scenes/charts/geography";
+
 import UpdateItem from "./scenes/items/updateItem";
+import DeleteItem from "./scenes/items/deleteItem";
 import ViewOrder from "./scenes/items/viewOrder";
 
 function App() {
@@ -53,6 +52,7 @@ function App() {
               <Route path="/users" element={<Users />} />
               <Route path="/users/create" element={<UserCreateForm />} />
 			        <Route path="/users/update" element={<UserUpdateForm />} />
+              <Route path="/users/delete" element={<UserDeleteForm />} />
               {/* <Route path="/contacts" element={<Contacts />} /> */}
               {/* <Route path="/invoices" element={<Invoices />} /> */}
               
@@ -61,14 +61,11 @@ function App() {
               <Route path="/listings" element={<Items />} />
               <Route path="/listings/create" element={<CreateItem />} />
               <Route path="/listings/update" element={<UpdateItem />} />
+              <Route path="/listings/delete" element={<DeleteItem />} />
               
               <Route path="/form" element={<Form />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/faq" element={<FAQ />} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
-              <Route path="/geography" element={<Geography />} />
             </Routes>
           </main>
         </div>
