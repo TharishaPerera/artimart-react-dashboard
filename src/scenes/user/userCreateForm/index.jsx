@@ -17,8 +17,8 @@ import Header from "../../../components/Header";
 const UserCreateForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  // const [customerFirstName, setCustomerFirstName] = useState('');
-  // const [customerLastName, setCustomerLastName] = useState('');
+  // const [userFirstName, setUserFirstName] = useState('');
+  // const [userLastName, setUserLastName] = useState('');
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
   // const [age, setAge] = useState('');
@@ -36,8 +36,8 @@ const UserCreateForm = () => {
   });
 
   const initialValues = {
-    customerFirstName: "",
-    customerLastName: "",
+    userFirstName: "",
+    userLastName: "",
     email: "",
     password: "",
     age: "",
@@ -57,10 +57,10 @@ const UserCreateForm = () => {
     "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&]).{8}$";
 
   const userSchema = yup.object().shape({
-    customerFirstName: yup
+    userFirstName: yup
       .string()
       .required("First name field cannot be empty."),
-    customerLastName: yup.string().required("Last name field cannot be empty."),
+    userLastName: yup.string().required("Last name field cannot be empty."),
     email: yup
       .string()
       .email("Invalid email address.")
@@ -83,10 +83,9 @@ const UserCreateForm = () => {
   });
 
   const handleFormSubmit = async (values) => {
-    console.log(values.customerFirstName);
 
-    let customerFirstName = values.customerFirstName;
-    let customerLastName = values.customerLastName;
+    let userFirstName = values.userFirstName;
+    let userLastName = values.userLastName;
     let email = values.email;
     let password = values.password;
     let age = values.age;
@@ -101,10 +100,10 @@ const UserCreateForm = () => {
 
     try {
       const response = Axios.post(
-        "https://artimart-api.up.railway.app/api/customers/register",
+        "https://artimart-api.up.railway.app/api/auth/register",
         {
-          customerFirstName,
-          customerLastName,
+          userFirstName,
+          userLastName,
           email,
           password,
           age,
@@ -119,10 +118,20 @@ const UserCreateForm = () => {
         }
       );
       console.log((await response).data);
+      // setUserFirstName('');
+      // setUserLastName('');
+      // setEmail('');
+      // setPassword('');
+      // setAge('');
+      // setPhone('');
+      // setHouse('');
+      // setAddressLine1('');
+      // setAddressLine2('');
+      // setCity('');
+      // setZipCode('');
     } catch (error) {
       console.log(error.response);
     }
-    console.log("I'm in!");
   };
 
   return (
@@ -159,13 +168,13 @@ const UserCreateForm = () => {
                 label="First Name"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.customerFirstName}
-                name="customerFirstName"
+                value={values.userFirstName}
+                name="userFirstName"
                 error={
-                  !!touched.customerFirstName && !!errors.customerFirstName
+                  !!touched.userFirstName && !!errors.userFirstName
                 }
                 helperText={
-                  touched.customerFirstName && errors.customerFirstName
+                  touched.userFirstName && errors.userFirstName
                 }
                 sx={{ gridColumn: "span 2" }}
               />
@@ -177,10 +186,10 @@ const UserCreateForm = () => {
                 label="Last Name"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.customerLastName}
-                name="customerLastName"
-                error={!!touched.customerLastName && !!errors.customerLastName}
-                helperText={touched.customerLastName && errors.customerLastName}
+                value={values.userLastName}
+                name="userLastName"
+                error={!!touched.userLastName && !!errors.userLastName}
+                helperText={touched.userLastName && errors.userLastName}
                 sx={{ gridColumn: "span 2" }}
               />
 

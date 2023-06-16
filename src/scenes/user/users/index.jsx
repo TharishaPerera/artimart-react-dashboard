@@ -6,12 +6,6 @@ import { tokens } from "../../../theme";
 import { mockDataTeam } from "../../../data/mockData";
 import Header from "../../../components/Header";
 
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-
 const Users = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -21,7 +15,7 @@ const Users = () => {
 
   const getUsers = async () => {
     try{
-      const data = await Axios.get("https://artimart-api.up.railway.app/api/customers");
+      const data = await Axios.get("https://artimart-api.up.railway.app/api/users");
       console.log(data.data);
       setUsers(data.data);
     }catch(error){
@@ -32,13 +26,12 @@ const Users = () => {
   // change title
   useEffect(() => {
     document.title = "Users | ARTIMART";
-
     getUsers();
   });
 
   const columns = [
-    { field: "customerFirstName", headerName: "FIRST NAME", flex: 0.3 },
-    { field: "customerLastName", headerName: "LAST NAME", flex: 0.3 },
+    { field: "userFirstName", headerName: "FIRST NAME", flex: 0.3 },
+    { field: "userLastName", headerName: "LAST NAME", flex: 0.3 },
     { field: "email", headerName: "EMAIL", flex: 0.5 },
     { field: "phone", headerName: "PHONE", flex: 0.2 },
     { field: "userRole", headerName: "USER ROLE", flex: 0.3 },
@@ -49,7 +42,10 @@ const Users = () => {
     { field: "city", headerName: "CITY", flex: 0.3 }
   ];
 
+  getUsers();
+
   return (
+    
     <Box>
       <Header title="Users" subtitle="All User Data" />
       <Box

@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
 import Header from "../../components/Header";
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Button, IconButton, Typography, useTheme, TextField } from "@mui/material";
 import { tokens } from "../../theme";
 import { mockTransactions, mockDataTeam } from "../../data/mockData";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 // Icons
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
@@ -23,10 +25,42 @@ const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const [users, setUsers] = useState([]);
+
+  const getUsers = async () => {
+    try{
+      const data = await Axios.get("https://artimart-api.up.railway.app/api/users");
+      setUsers(data.data);
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+  const [dataCount, setDataCount] = useState([]);
+
+  const getDataCount = async () => {
+    try{
+      const data_count = await Axios.get("https://artimart-api.up.railway.app/api/count");
+      setDataCount(data_count.data);
+    }catch(error){
+      console.log(error);
+    }
+  }
+  
+  // getDataCount();
   // change title
   useEffect(() => {
     document.title = "Dashboard | ARTIMART";
+
+    getUsers();
   });
+
+  const columns = [
+    { field: "userFirstName", headerName: "FIRST NAME", flex: 0.2 },
+    { field: "userLastName", headerName: "LAST NAME", flex: 0.2 },
+    { field: "email", headerName: "EMAIL", flex: 0.4 },
+    { field: "userRole", headerName: "USER ROLE", flex: 0.2 }
+  ];
 
   return (
     <Box m="20px">
@@ -38,7 +72,7 @@ const Dashboard = () => {
       >
         <Header
           title="Dashboard"
-          subtitle="Admin Dashboard for ArtiMart E-Commerce Platform"
+          subtitle="Welcome to your personalized Dashboard"
         />
 
         <Box mr="20px">
@@ -73,8 +107,24 @@ const Dashboard = () => {
           justifyContent="center"
           borderRadius="10px"
         >
+          {/* <Typography
+                variant="h5"
+                fontWeight="600"
+                color={colors.grey[100]}
+              >
+                Total Users
+              </Typography>
+
+          <TextField
+                variant="filled"
+                type="text"
+                onChange={(e) => setDataCount(e.target.value)}
+                value={dataCount.data}
+                name="userCount"
+              /> */}
+
           <StatBox
-            title="12,352"
+            title="12"
             subtitle="Total Users"
             progress="0.7"
             increase="+14%"
@@ -117,7 +167,7 @@ const Dashboard = () => {
         >
           <StatBox
             title="$12,352"
-            subtitle="Total Income Received"
+            subtitle="Total Products"
             progress="0.5"
             increase="+14%"
             icon={
@@ -266,38 +316,12 @@ const Dashboard = () => {
               Newly Registered Users
             </Typography>
           </Box>
-          {mockDataTeam.map((data, i) => (
-            <Box
-              key={`${data.id}-${i}`}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              borderBottom={`4px solid ${colors.primary[700]}`}
-              p="15px"
-            >
-              <Box>
-                <Typography
-                  color={colors.greenAccent[500]}
-                  variant="h5"
-                  fontWeight="600"
-                >
-                  {data.name}
-                </Typography>
-
-                <Typography color={colors.grey[100]}>{data.role}</Typography>
-              </Box>
-
-              <Box color={colors.grey[100]}>{data.email}</Box>
-              <Box
-                backgroundColor={colors.greenAccent[500]}
-                p="5px 10px"
-                borderRadius="4px"
-              >
-                NEW
-                {/* ${data.cost} */}
-              </Box>
-            </Box>
-          ))}
+          <Box>
+            <DataGrid
+            rows={users}
+            columns={columns}
+            getRowId={(row) => row._id}/>
+          </Box>
         </Box>
       </Box>
     </Box>

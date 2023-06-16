@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Axios from "axios";
 import {
   Box,
   Button,
@@ -28,24 +29,28 @@ const CreateItem = () => {
   });
 
   const initialValues = {
-    category: "default",
+    categoryName: "default",
     price: 0.0,
-    itemName: "",
-    smallDescription: "",
-    longDescription: "",
-    images: "",
+    productName: "",
+    description: "",
+    productImages: "",
+    quantity: "",
+    dimension: ""
   };
 
   const itemSchema = yup.object().shape({
-    category: yup.string().required("Category field cannot be empty. "),
+    categoryName: yup.string().required("Category field cannot be empty. "),
     price: yup.number().min(0).required("Price field cannot be empty."),
-    itemName: yup.string().required("Product name field cannot be empty."),
-    smallDescription: yup
+    productName: yup.string().required("Product name field cannot be empty."),
+    description: yup
       .string()
-      .required("Small description field cannot be empty."),
-    longDescription: yup
+      .required("Description field cannot be empty."),
+    quantity: yup
+      .number()
+      .required("Quantity cannot be empty."),
+    dimension: yup
       .string()
-      .required("Long description field cannot be empty."),
+      .required("Dimension field cannot be empty.")
   });
 
   const [selectedImages, setSelectedImages] = useState([]);
@@ -54,16 +59,40 @@ const CreateItem = () => {
     const selectedFilesArray = Array.from(selectedFiles);
     console.log(selectedFilesArray.length);
 
-    const imagesArray = selectedFilesArray.map((file) => {
+    const productImagesArray = selectedFilesArray.map((file) => {
       return URL.createObjectURL(file);
     });
 
-    setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+    setSelectedImages((previousImages) => previousImages.concat(productImagesArray));
   };
 
-  const handleFormSubmit = (values) => {
-    console.log(values);
-    console.log(selectedImages);
+  const handleFormSubmit = async (values) => {
+
+    let productName = values.productName;
+    let description = values.description;
+    let categoryName = values.categoryName;
+    let price = values.price;
+    let quantity = values.quantity;
+    let dimension = values.dimension;
+    let onSelectFile = values.onSelectFile;
+
+    try {
+      const response = Axios.post(
+        "https://artimart-api.up.railway.app/api/products",
+        {
+          productName,
+          description,
+          categoryName,
+          price,
+          quantity,
+          dimension,
+          onSelectFile
+        }
+      );
+      console.log((await response).data);
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   return (
@@ -100,42 +129,51 @@ const CreateItem = () => {
                 }}
               >
                 <FormControl sx={{ gridColumn: "span 2" }}>
-                  <InputLabel id="category-select" sx={{ lineHeight: 4.5 }}>
+                  <InputLabel id="categoryName-select" sx={{ lineHeight: 4.5 }}>
                     Category
                   </InputLabel>
                   <Select
-                    labelId="category-select"
+                    labelId="categoryName-select"
                     fullWidth
                     variant="filled"
                     type="text"
                     label="Category"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    value={values.category}
-                    name="category"
-                    error={!!touched.category && !!errors.category}
-                    helperText={touched.category && errors.category}
+                    value={values.categoryName}
+                    name="categoryName"
+                    error={!!touched.categoryName && !!errors.categoryName}
+                    helperText={touched.categoryName && errors.categoryName}
                   >
-                    <MenuItem value="default" label="Please select a category">
-                      Please select a category
+                    <MenuItem value="default" label="Please select a categoryName">
+                      Please select a categoryName
                     </MenuItem>
-                    <MenuItem value="decor" label="Home Decor">
-                      Home Decor
+                    <MenuItem value="batik" label="Batik">
+                      Batik
                     </MenuItem>
-                    <MenuItem value="jewelry" label="Jewelry and Accessories">
-                      Jewelry and Accessories
+                    <MenuItem value="woodCarving" label="Wood Carving">
+                      Wood Carving
                     </MenuItem>
-                    <MenuItem value="fashion" label="Fashion and Apparel">
-                      Fashion and Apparel
+                    <MenuItem value="masks" label="Masks">
+                      Masks
                     </MenuItem>
-                    <MenuItem value="gifts" label="Gifts and Souvenirs">
-                      Gifts and Souvenirs
+                    <MenuItem value="jewelryMaking" label="Jewelry Making">
+                      Jewelry Making
                     </MenuItem>
-                    <MenuItem
-                      value="stationery"
-                      label="Stationery and Paper Goods"
-                    >
-                      Stationery and Paper Goods
+                    <MenuItem value="brassWork" label="Brass Work">
+                      Brass Work
+                    </MenuItem>
+                    <MenuItem value="coirProducts" label="Coir Products">
+                      Coir Products
+                    </MenuItem>
+                    <MenuItem value="caneProducts" label="Cane Products">
+                      Cane Products
+                    </MenuItem>
+                    <MenuItem value="drums" label="Drums">
+                      Drums
+                    </MenuItem>
+                    <MenuItem value="pottery" label="Pottery">
+                      Pottery
                     </MenuItem>
                   </Select>
                 </FormControl>
@@ -166,10 +204,10 @@ const CreateItem = () => {
                   label="Product Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.itemName}
-                  name="itemName"
-                  error={!!touched.itemName && !!errors.itemName}
-                  helperText={touched.itemName && errors.itemName}
+                  value={values.productName}
+                  name="productName"
+                  error={!!touched.productName && !!errors.productName}
+                  helperText={touched.productName && errors.productName}
                   sx={{ gridColumn: "span 4" }}
                 />
                 <TextField
@@ -181,13 +219,13 @@ const CreateItem = () => {
                   rows={8}
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.smallDescription}
-                  name="smallDescription"
+                  value={values.description}
+                  name="description"
                   error={
-                    !!touched.smallDescription && !!errors.smallDescription
+                    !!touched.description && !!errors.description
                   }
                   helperText={
-                    touched.smallDescription && errors.smallDescription
+                    touched.description && errors.description
                   }
                   sx={{ gridColumn: "span 4" }}
                 />
@@ -246,11 +284,11 @@ const CreateItem = () => {
                   <label className="img-upload-label">
                     Add Images
                     <br />
-                    <span id="image-validation">Add upto 6 images</span>
+                    <span id="image-validation">Add upto 6 productImages</span>
                     <input
                       type="file"
-                      name="images"
-                      value={values.images}
+                      name="productImages"
+                      value={values.productImages}
                       onChange={onSelectFile}
                       multiple
                       accept="image/png, image/jpg, image/jpeg, image/gif, image/webp"
@@ -266,7 +304,7 @@ const CreateItem = () => {
                     display="grid"
                     gap="10px"
                     gridTemplateColumns="repeat(3, minmax(0, 1fr))"
-                    className="images"
+                    className="productImages"
                   >
                     {selectedImages &&
                       selectedImages.slice(0, 6).map((image) => {
