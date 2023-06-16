@@ -17,19 +17,19 @@ import Header from "../../../components/Header";
 const UserCreateForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const [customerFirstName, setCustomerFirstName] = useState('');
-  const [customerLastName, setCustomerLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
-  const [phone, setPhone] = useState('');
-  const [userRole, setUserRole] = useState('');
-  const [house, setHouse] = useState('');
-  const [addressLine1, setAddressLine1] = useState('');
-  const [addressLine2, setAddressLine2] = useState('');
-  const [city, setCity] = useState('');
-  const [zipCode, setZipCode] = useState('');
+  // const [customerFirstName, setCustomerFirstName] = useState('');
+  // const [customerLastName, setCustomerLastName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [age, setAge] = useState('');
+  // const [gender, setGender] = useState('Male');
+  // const [phone, setPhone] = useState('');
+  // const [userRole, setUserRole] = useState('Customer');
+  // const [house, setHouse] = useState('');
+  // const [addressLine1, setAddressLine1] = useState('');
+  // const [addressLine2, setAddressLine2] = useState('');
+  // const [city, setCity] = useState('');
+  // const [zipCode, setZipCode] = useState('');
 
   useEffect(() => {
     document.title = "Create Users | ARTIMART";
@@ -57,7 +57,9 @@ const UserCreateForm = () => {
     "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&]).{8}$";
 
   const userSchema = yup.object().shape({
-    customerFirstName: yup.string().required("First name field cannot be empty."),
+    customerFirstName: yup
+      .string()
+      .required("First name field cannot be empty."),
     customerLastName: yup.string().required("Last name field cannot be empty."),
     email: yup
       .string()
@@ -80,30 +82,48 @@ const UserCreateForm = () => {
     zipCode: yup.string().required("Zip code field cannot be empty."),
   });
 
-  // const handleFormSubmit = (values) => {
-  //   console.log(values);
-  // };
+  const handleFormSubmit = async (values) => {
+    console.log(values.customerFirstName);
 
-  const handleSubmit = async (e) => {
-    //e.preventDefault();
-    try{
-      const response = Axios.post("https://artimart-api.up.railway.app/api/customers/register", {
-        customerFirstName,
-        customerLastName,
-        email,
-        password,
-        age,
-        gender,
-        phone,
-        userRole,
-        house, addressLine1, addressLine2, city, zipCode
-      });
-      console.log(response.data);
-    }catch(error){
-      console.log(error.response)
+    let customerFirstName = values.customerFirstName;
+    let customerLastName = values.customerLastName;
+    let email = values.email;
+    let password = values.password;
+    let age = values.age;
+    let gender = values.gender;
+    let phone = values.phone;
+    let userRole = values.userRole;
+    let house = values.house;
+    let addressLine1 = values.addressLine1;
+    let addressLine2 = values.addressLine2;
+    let city = values.city;
+    let zipCode = values.zipCode;
+
+    try {
+      const response = Axios.post(
+        "https://artimart-api.up.railway.app/api/customers/register",
+        {
+          customerFirstName,
+          customerLastName,
+          email,
+          password,
+          age,
+          gender,
+          phone,
+          userRole,
+          house,
+          addressLine1,
+          addressLine2,
+          city,
+          zipCode,
+        }
+      );
+      console.log((await response).data);
+    } catch (error) {
+      console.log(error.response);
     }
-    console.log("Im in!")
-  }
+    console.log("I'm in!");
+  };
 
   return (
     <Box m="20px">
@@ -111,7 +131,7 @@ const UserCreateForm = () => {
         <Header title="Create User" subtitle="Create A New User Account" />
       </Box>
       <Formik
-        onSubmit={handleSubmit}
+        onSubmit={handleFormSubmit}
         initialValues={initialValues}
         validationSchema={userSchema}
       >
@@ -138,11 +158,15 @@ const UserCreateForm = () => {
                 type="text"
                 label="First Name"
                 onBlur={handleBlur}
-                onChange={(e) => setCustomerFirstName(e.target.value)}
-                value={customerFirstName}
+                onChange={handleChange}
+                value={values.customerFirstName}
                 name="customerFirstName"
-                error={!!touched.customerFirstName && !!errors.customerFirstName}
-                helperText={touched.customerFirstName && errors.customerFirstName}
+                error={
+                  !!touched.customerFirstName && !!errors.customerFirstName
+                }
+                helperText={
+                  touched.customerFirstName && errors.customerFirstName
+                }
                 sx={{ gridColumn: "span 2" }}
               />
 
@@ -152,8 +176,8 @@ const UserCreateForm = () => {
                 type="text"
                 label="Last Name"
                 onBlur={handleBlur}
-                onChange={(e) => setCustomerLastName(e.target.value)}
-                value={customerLastName}
+                onChange={handleChange}
+                value={values.customerLastName}
                 name="customerLastName"
                 error={!!touched.customerLastName && !!errors.customerLastName}
                 helperText={touched.customerLastName && errors.customerLastName}
@@ -166,8 +190,8 @@ const UserCreateForm = () => {
                 type="text"
                 label="House Number"
                 onBlur={handleBlur}
-                onChange={(e) => setHouse(e.target.value)}
-                value={house}
+                onChange={handleChange}
+                value={values.house}
                 name="house"
                 error={!!touched.house && !!errors.house}
                 helperText={touched.house && errors.house}
@@ -180,8 +204,8 @@ const UserCreateForm = () => {
                 type="text"
                 label="Email"
                 onBlur={handleBlur}
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
+                onChange={handleChange}
+                value={values.email}
                 name="email"
                 error={!!touched.email && !!errors.email}
                 helperText={touched.email && errors.email}
@@ -194,8 +218,8 @@ const UserCreateForm = () => {
                 type="text"
                 label="Address Line 1"
                 onBlur={handleBlur}
-                onChange={(e) => setAddressLine1(e.target.value)}
-                value={addressLine1}
+                onChange={handleChange}
+                value={values.addressLine1}
                 name="addressLine1"
                 error={!!touched.addressLine1 && !!errors.addressLine1}
                 helperText={touched.addressLine1 && errors.addressLine1}
@@ -208,8 +232,8 @@ const UserCreateForm = () => {
                 type="password"
                 label="Password"
                 onBlur={handleBlur}
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
+                onChange={handleChange}
+                value={values.password}
                 name="password"
                 error={!!touched.password && !!errors.password}
                 helperText={touched.password && errors.password}
@@ -222,8 +246,8 @@ const UserCreateForm = () => {
                 type="text"
                 label="Address Line 2 (Optional)"
                 onBlur={handleBlur}
-                onChange={(e) => setAddressLine2(e.target.value)}
-                value={addressLine2}
+                onChange={handleChange}
+                value={values.addressLine2}
                 name="addressLine2"
                 error={!!touched.addressLine2 && !!errors.addressLine2}
                 helperText={touched.addressLine2 && errors.addressLine2}
@@ -236,8 +260,8 @@ const UserCreateForm = () => {
                 type="number"
                 label="Age"
                 onBlur={handleBlur}
-                onChange={(e) => setAge(e.target.value)}
-                value={age}
+                onChange={handleChange}
+                value={values.age}
                 name="age"
                 error={!!touched.age && !!errors.age}
                 helperText={touched.age && errors.age}
@@ -255,8 +279,8 @@ const UserCreateForm = () => {
                   type="text"
                   label="Gender"
                   onBlur={handleBlur}
-                  onChange={(e) => setGender(e.target.value)}
-                  value={gender}
+                  onChange={handleChange}
+                  value={values.gender}
                   name="gender"
                   error={!!touched.gender && !!errors.gender}
                   helperText={touched.gender && errors.gender}
@@ -276,8 +300,8 @@ const UserCreateForm = () => {
                 type="text"
                 label="City"
                 onBlur={handleBlur}
-                onChange={(e) => setCity(e.target.value)}
-                value={city}
+                onChange={handleChange}
+                value={values.city}
                 name="city"
                 error={!!touched.city && !!errors.city}
                 helperText={touched.city && errors.city}
@@ -290,8 +314,8 @@ const UserCreateForm = () => {
                 type="text"
                 label="Phone Number"
                 onBlur={handleBlur}
-                onChange={(e) => setPhone(e.target.value)}
-                value={phone}
+                onChange={handleChange}
+                value={values.phone}
                 name="phone"
                 error={!!touched.phone && !!errors.phone}
                 helperText={touched.phone && errors.phone}
@@ -309,8 +333,8 @@ const UserCreateForm = () => {
                   type="text"
                   label="Role"
                   onBlur={handleBlur}
-                  onChange={(e) => setUserRole(e.target.value)}
-                  value={userRole}
+                  onChange={handleChange}
+                  value={values.userRole}
                   name="userRole"
                   error={!!touched.userRole && !!errors.userRole}
                   helperText={touched.userRole && errors.userRole}
@@ -333,8 +357,8 @@ const UserCreateForm = () => {
                 type="text"
                 label="Zip Code"
                 onBlur={handleBlur}
-                onChange={(e) => setZipCode(e.target.value)}
-                value={zipCode}
+                onChange={handleChange}
+                value={values.zipCode}
                 name="zipCode"
                 error={!!touched.zipCode && !!errors.zipCode}
                 helperText={touched.zipCode && errors.zipCode}
@@ -343,7 +367,12 @@ const UserCreateForm = () => {
             </Box>
 
             <Box display="flex" justifyContent="end" mt="20px">
-              <Button type="submit" id="createUserBtn" color="secondary" variant="contained">
+              <Button
+                type="submit"
+                id="createUserBtn"
+                color="secondary"
+                variant="contained"
+              >
                 Create User
               </Button>
             </Box>
