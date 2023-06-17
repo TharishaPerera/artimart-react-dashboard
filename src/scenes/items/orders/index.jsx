@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Box, Typography, useTheme, IconButton, Tooltip } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../../theme";
-import { mockDataTeam } from "../../../data/mockData";
+import { mockOrders } from "../../../data/mockData";
 import Header from "../../../components/Header";
 
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
@@ -16,11 +16,14 @@ const Orders = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  
   // change title
   useEffect(() => {
     document.title = "Orders | ARTIMART";
   });
-
+  
+  // console.log(mockDataContacts)
+  // return false;
   const columns = [
     { field: "id", headerName: "ID", flex: 0.2 },
     {
@@ -29,80 +32,9 @@ const Orders = () => {
       flex: 0.5,
       cellClassName: "name-column--cell",
     },
-    {
-      field: "email",
-      headerName: "EMAIL",
-      flex: 0.5,
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-    },
-    { field: "gender", headerName: "GENDER", flex: 0.3 },
-    { field: "age", headerName: "AGE", flex: 0.2 },
-    { field: "mobile", headerName: "PHONE", flex: 0.3 },
-    { field: "telephone", headerName: "TELEPHONE", flex: 0.3 },
-    { field: "address", headerName: "ADDRESS", flex: 0.5 },
-    { field: "zipCode", headerName: "ZIP CODE", flex: 0.2 },
-    {
-      field: "role",
-      headerName: "ROLE",
-      flex: 0.5,
-      renderCell: ({ row: { role } }) => {
-        return (
-          <Box
-            width="50%"
-            p="5px"
-            display="flex"
-            justifyContent="center"
-            backgroundColor={
-              role === "admin"
-                ? colors.greenAccent[600]
-                : colors.greenAccent[700]
-            }
-            borderRadius="4px"
-          >
-            {role === "admin" && <AdminPanelSettingsOutlinedIcon />}
-            {role === "manager" && <SecurityOutlinedIcon />}
-            {role === "user" && <LockOpenOutlinedIcon />}
-            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {role}
-            </Typography>
-          </Box>
-        );
-      },
-    },
-    {
-      field: "action",
-      headerName: "ACTION",
-      flex: 0.5,
-      disableClickEventBubbling: true,
-      renderCell: ({ row: { id } }) => {
-        const handleEdit = (e) => {
-          e.stopPropagation();
-          var base_url = window.location.origin;
-
-          window.location.replace(base_url + "/users/update/");
-        };
-
-        const handleDelete = (e) => {
-          e.stopPropagation();
-          console.log(id);
-          alert(id);
-        };
-
-        return (
-          <Box>
-            <IconButton onClick={handleEdit}>
-              <Tooltip title="View Order" placement="right">
-                <OpenInNewIcon
-                  sx={{ fontSize: "26p", color: colors.greenAccent[500] }}
-                />
-              </Tooltip>
-            </IconButton>
-          </Box>
-        );
-      },
-    },
+    { field: "price", headerName: "Price", flex: 0.3 },
+    { field: "city", headerName: "Address", flex: 0.2 },
+    { field: "status", headerName: "STATUS", flex: 0.3 },
   ];
 
   return (
@@ -125,7 +57,7 @@ const Orders = () => {
         }}
       >
         <DataGrid
-          rows={mockDataTeam}
+          rows={mockOrders}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
         />

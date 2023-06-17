@@ -279,6 +279,79 @@ export const mockDataTeam = [
   },
 ];
 
+export const mockOrders = [
+    {
+      id: 1,
+      name: "Cat Mechanism",
+      price: "135.99",
+      city: "Bluff Springs",
+      status: "New"
+    },
+    {
+      id: 2,
+      name: "Vitamin Rig",
+      price: "165.99",
+      city: "North Charleston",
+      status: "Accepted"
+    },
+    {
+      id: 3,
+      name: "Party Widget",
+      price: "142.99",
+      city: "Lake Como",
+      status: "Delivered"
+    },
+    {
+      id: 4,
+      name: "Hair Care Component",
+      price: "27.95",
+      city: "Dudley",
+      status: "Accepted"
+    },
+    {
+      id: 5,
+      name: "Skin Care Mechanism",
+      price: "51",
+      city: "Naperville",
+      status: "Delivered"
+    },
+    {
+      id: 6,
+      name: "Tire Gizmo",
+      price: "182",
+      city: "Kinnear",
+      status: "Accepted"
+    },
+    {
+      id: 7,
+      name: "Aquarium Equipment",
+      price: "41.95",
+      city: "Newark",
+      status: "Accepted"
+    },
+    {
+      id: 8,
+      name: "Personal Machine",
+      price: "67.99",
+      city: "Miami",
+      status: "Pending"
+    },
+    {
+      id: 9,
+      name: "Aquarium Accessory",
+      price: "156.99",
+      city: "Thibodaux",
+      status: "Pending"
+    },
+    {
+      id: 10,
+      name: "Truck Accessory",
+      price: "194.99",
+      city: "Ruby",
+      status: "New"
+    }
+]
+
 export const mockDataContacts = [
   {
     id: 1,
